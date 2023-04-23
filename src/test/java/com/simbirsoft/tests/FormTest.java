@@ -63,10 +63,5 @@ public class FormTest {
         table.shouldHave(Condition.text(file.getName()));
         table.shouldHave(Condition.text(address));
         table.shouldHave(Condition.text("NCR Delhi"));
-
-
-
-
-
     }
 }
