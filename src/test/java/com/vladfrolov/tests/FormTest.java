@@ -1,4 +1,4 @@
-package com.simbirsoft.tests;
+package com.vladfrolov.tests;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -20,7 +20,7 @@ public class FormTest {
     }
 
     @Test
-    void test() {
+    public void test() {
         String url = "https://demoqa.com/automation-practice-form";
         String firstName = "testFirstName";
         String lastName = "testLastName";
@@ -34,7 +34,6 @@ public class FormTest {
         $("#lastName").setValue(lastName);
         $("#userEmail").setValue(email);
         $("label[for=gender-radio-1]").click();
-
         $("input#userNumber").setValue(mobile);
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("October");
@@ -43,7 +42,7 @@ public class FormTest {
         $("#subjectsContainer #subjectsInput").setValue("E");
         $("#react-select-2-option-0").click();
         $("label[for=hobbies-checkbox-1]").click();
-         $("input[type=file]").uploadFile(file);
+        $("input[type=file]").uploadFile(file);
         $("#currentAddress").setValue(address);
         $("#state").scrollTo().click();
         $("#react-select-3-option-0").click();
