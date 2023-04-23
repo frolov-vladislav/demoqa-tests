@@ -27,7 +27,7 @@ public class FormTest {
         String mobile = "2222222222";
         String email = "test@mail.com";
         String address = "some street 1";
-        File file = new File("src/test/java/com/simbirsoft/attachments/gosling.png");
+        File file = new File("src/test/java/com/vladfrolov/attachments/gosling.png");
 
         open(url);
         $("#firstName").setValue(firstName);
@@ -51,16 +51,21 @@ public class FormTest {
         $("#submit").click();
 
         SelenideElement table = $(By.tagName("table"));
-        table.shouldHave(Condition.text(firstName));
-        table.shouldHave(Condition.text(lastName));
-        table.shouldHave(Condition.text(email));
-        table.shouldHave(Condition.text("Male"));
-        table.shouldHave(Condition.text(mobile));
-        table.shouldHave(Condition.text("21 October,1998"));
-        table.shouldHave(Condition.text("English"));
-        table.shouldHave(Condition.text("Sports"));
-        table.shouldHave(Condition.text(file.getName()));
-        table.shouldHave(Condition.text(address));
-        table.shouldHave(Condition.text("NCR Delhi"));
+        contains(table, firstName);
+        contains(table, lastName);
+        contains(table, email);
+        contains(table, email);
+        contains(table, "Male");
+        contains(table, mobile);
+        contains(table, "21 October,1998");
+        contains(table, "English");
+        contains(table, "Sports");
+        contains(table, file.getName());
+        contains(table, address);
+        contains(table, "NCR Delhi");
+    }
+
+    public void contains(SelenideElement element, String value) {
+        element.shouldHave(Condition.text(value));
     }
 }
