@@ -1,6 +1,5 @@
 package com.vladfrolov.tests;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,10 +8,20 @@ import org.openqa.selenium.By;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class FormTest {
+
+    String url = "https://demoqa.com/automation-practice-form";
+    String firstName = "testFirstName";
+    String lastName = "testLastName";
+    String mobile = "2222222222";
+    String email = "test@mail.com";
+    String address = "some street 1";
+    File file = new File("src/test/resources/formTest/gosling.png");
+
     @BeforeAll
     static void beforeAll() {
         Configuration.browserSize = "3100x1080";
@@ -21,13 +30,6 @@ public class FormTest {
 
     @Test
     public void test() {
-        String url = "https://demoqa.com/automation-practice-form";
-        String firstName = "testFirstName";
-        String lastName = "testLastName";
-        String mobile = "2222222222";
-        String email = "test@mail.com";
-        String address = "some street 1";
-        File file = new File("src/test/java/com/vladfrolov/attachments/gosling.png");
 
         open(url);
         $("#firstName").setValue(firstName);
@@ -51,21 +53,15 @@ public class FormTest {
         $("#submit").click();
 
         SelenideElement table = $(By.tagName("table"));
-        contains(table, firstName);
-        contains(table, lastName);
-        contains(table, email);
-        contains(table, email);
-        contains(table, "Male");
-        contains(table, mobile);
-        contains(table, "21 October,1998");
-        contains(table, "English");
-        contains(table, "Sports");
-        contains(table, file.getName());
-        contains(table, address);
-        contains(table, "NCR Delhi");
-    }
-
-    public void contains(SelenideElement element, String value) {
-        element.shouldHave(Condition.text(value));
+        table.shouldHave(text(firstName));
+        table.shouldHave(text(lastName));
+        table.shouldHave(text(email));
+        table.shouldHave(text("Male"));
+        table.shouldHave(text("21 October,1998"));
+        table.shouldHave(text("English"));
+        table.shouldHave(text("Sports"));
+        table.shouldHave(text(file.getName()));
+        table.shouldHave(text(address));
+        table.shouldHave(text("NCR Delhi"));
     }
 }
