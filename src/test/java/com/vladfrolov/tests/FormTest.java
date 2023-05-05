@@ -1,67 +1,44 @@
 package com.vladfrolov.tests;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
+import pages.RegistrationPage;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static com.vladfrolov.tests.TestData.*;
 
-public class FormTest {
+public class FormTest extends TestBase {
 
-    String url = "https://demoqa.com/automation-practice-form";
-    String firstName = "testFirstName";
-    String lastName = "testLastName";
-    String mobile = "2222222222";
-    String email = "test@mail.com";
-    String address = "some street 1";
     File file = new File("src/test/resources/formTest/gosling.png");
-
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browserSize = "3100x1080";
-        Configuration.pageLoadTimeout = 60000;
-    }
+    RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
-    public void test() {
+    public void test() throws Exception {
+        open("/automation-practice-form");
+        registrationPage.typeFirstName(FIRST_NAME);
+        registrationPage.typeLastName(LAST_NAME);
+        registrationPage.typeEmail(EMAIL);
+        registrationPage.checkMaleCheckBox();
+        registrationPage.typeNumber(PHONE_NUMBER);
+        registrationPage.calendarComponent.setBirthday(MONTH, YEAR, DAY);
+        registrationPage.chooseSubject(SUBJECT);
+        registrationPage.checkReadingCheckbox();
+        registrationPage.uploadFile(file);
+        registrationPage.typeAddress(ADDRESS);
+        registrationPage.chooseStateAndCity(STATE, CITY);
+        registrationPage.clickOnSubmitButton();
 
-        open(url);
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#userEmail").setValue(email);
-        $("label[for=gender-radio-1]").click();
-        $("input#userNumber").setValue(mobile);
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption("October");
-        $(".react-datepicker__year-select").selectOption("1998");
-        $(".react-datepicker__day--021").click();
-        $("#subjectsContainer #subjectsInput").setValue("E");
-        $("#react-select-2-option-0").click();
-        $("label[for=hobbies-checkbox-1]").click();
-        $("input[type=file]").uploadFile(file);
-        $("#currentAddress").setValue(address);
-        $("#state").scrollTo().click();
-        $("#react-select-3-option-0").click();
-        $("#city").click();
-        $("#react-select-4-option-0").click();
-        $("#submit").click();
-
-        SelenideElement table = $(By.tagName("table"));
-        table.shouldHave(text(firstName));
-        table.shouldHave(text(lastName));
-        table.shouldHave(text(email));
-        table.shouldHave(text("Male"));
-        table.shouldHave(text("21 October,1998"));
-        table.shouldHave(text("English"));
-        table.shouldHave(text("Sports"));
-        table.shouldHave(text(file.getName()));
-        table.shouldHave(text(address));
-        table.shouldHave(text("NCR Delhi"));
+        registrationPage.resultPopupTitleIsVisible();
+        registrationPage.checkResultsValue("Student Name", FIRST_NAME + " " + LAST_NAME);
+        registrationPage.checkResultsValue("Student Email", EMAIL);
+        registrationPage.checkResultsValue("Gender", GENDER);
+        registrationPage.checkResultsValue("Mobile", PHONE_NUMBER);
+        registrationPage.checkResultsValue("Date of Birth", DAY + " " + MONTH + "," + YEAR);
+        registrationPage.checkResultsValue("Subjects", SUBJECT);
+        registrationPage.checkResultsValue("Hobbies", HOBIE);
+        registrationPage.checkResultsValue("Picture", file.getName());
+        registrationPage.checkResultsValue("Address", ADDRESS);
+        registrationPage.checkResultsValue("State and City", STATE + " " + CITY);
     }
 }
