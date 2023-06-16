@@ -91,7 +91,7 @@ public class RegistrationPage {
         stateDropMenu.scrollTo().click();
         $(byText(state)).click();
         cityDropMenu.scrollTo().click();
-        $(".css-11unzgr").$(byText(city)).click();
+        $("#stateCity-wrapper").$(byText(city)).click();
     }
 
     public void clickOnSubmitButton() {
