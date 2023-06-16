@@ -88,9 +88,9 @@ public class RegistrationPage {
     }
 
     public void chooseStateAndCity(String state, String city) {
-        stateDropMenu.click();
+        stateDropMenu.scrollTo().click();
         $(byText(state)).click();
-        cityDropMenu.click();
+        cityDropMenu.scrollTo().click();
         $("#stateCity-wrapper").$(byText(city)).click();
     }
 
