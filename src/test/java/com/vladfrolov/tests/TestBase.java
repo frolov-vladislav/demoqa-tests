@@ -12,7 +12,7 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "3600x1080";
+        Configuration.browserSize = "1980x1080";
         Configuration.pageLoadTimeout = 60000;
         SelenideLogger.addListener("Allure", new AllureSelenide());
 
@@ -20,7 +20,7 @@ public class TestBase {
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
         Configuration.browserCapabilities = capabilities;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub/";
+//        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub/";
     }
 
     @AfterEach
