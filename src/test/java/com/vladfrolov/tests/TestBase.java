@@ -1,7 +1,12 @@
 package com.vladfrolov.tests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import  helpers.Attach;
 
 public class TestBase {
     @BeforeAll
@@ -9,5 +14,18 @@ public class TestBase {
         Configuration.browserSize = "3100x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadTimeout = 60000;
+
+        SelenideLogger.addListener("Allure", new AllureSelenide());
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("enableVideo", true);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
     }
 }

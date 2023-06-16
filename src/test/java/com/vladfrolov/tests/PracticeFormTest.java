@@ -1,46 +1,55 @@
 package com.vladfrolov.tests;
 
-import com.vladfrolov.tests.actions.RegistrationPageActions;
-import com.vladfrolov.tests.asserts.RegistrationPageAsserts;
+import com.vladfrolov.tests.pages.RegistrationPage;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.vladfrolov.tests.TestData.*;
+import static io.qameta.allure.Allure.step;
 
 public class PracticeFormTest extends TestBase {
 
     File file = new File("src/test/resources/formTest/gosling.png");
-    RegistrationPageActions action = new RegistrationPageActions();
-    RegistrationPageAsserts assertion = new RegistrationPageAsserts();
+    RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
     public void test() throws Exception {
-        open("/automation-practice-form");
-        action.typeFirstName(FIRST_NAME);
-        action.typeLastName(LAST_NAME);
-        action.typeEmail(EMAIL);
-        action.checkMaleCheckBox();
-        action.typeNumber(PHONE_NUMBER);
-        action.calendarComponent.setBirthday(MONTH, YEAR, DAY);
-        action.chooseSubject(SUBJECT);
-        action.checkReadingCheckbox();
-        action.uploadFile(file);
-        action.typeAddress(ADDRESS);
-        action.chooseStateAndCity(STATE, CITY);
-        action.clickOnSubmitButton();
+        step("Open students registration form", () -> {
+            open("/automation-practice-form");
+        });
 
-        assertion.resultPopupTitleIsVisible();
-        assertion.checkResultsValue("Student Name", FIRST_NAME + " " + LAST_NAME);
-        assertion.checkResultsValue("Student Email", EMAIL);
-        assertion.checkResultsValue("Gender", GENDER);
-        assertion.checkResultsValue("Mobile", PHONE_NUMBER);
-        assertion.checkResultsValue("Date of Birth", DAY + " " + MONTH + "," + YEAR);
-        assertion.checkResultsValue("Subjects", SUBJECT);
-        assertion.checkResultsValue("Hobbies", HOBIE);
-        assertion.checkResultsValue("Picture", file.getName());
-        assertion.checkResultsValue("Address", ADDRESS);
-        assertion.checkResultsValue("State and City", STATE + " " + CITY);
+        step("Fill form", () -> {
+            registrationPage.typeFirstName(FIRST_NAME);
+            registrationPage.typeLastName(LAST_NAME);
+            registrationPage.typeEmail(EMAIL);
+            registrationPage.checkMaleCheckBox();
+            registrationPage.typeNumber(PHONE_NUMBER);
+            registrationPage.calendarComponent.setBirthday(MONTH, YEAR, DAY);
+            registrationPage.chooseSubject(SUBJECT);
+            registrationPage.checkReadingCheckbox();
+            registrationPage.uploadFile(file);
+            registrationPage.typeAddress(ADDRESS);
+            registrationPage.chooseStateAndCity(STATE, CITY);
+        });
+
+        step("Submit filled form", () -> {
+            registrationPage.clickOnSubmitButton();
+        });
+
+        step("Virify successful form submit", () -> {
+            registrationPage.resultPopupTitleIsVisible();
+            registrationPage.checkResultsValue("Student Name", FIRST_NAME + " " + LAST_NAME);
+            registrationPage.checkResultsValue("Student Email", EMAIL);
+            registrationPage.checkResultsValue("Gender", GENDER);
+            registrationPage.checkResultsValue("Mobile", PHONE_NUMBER);
+            registrationPage.checkResultsValue("Date of Birth", DAY + " " + MONTH + "," + YEAR);
+            registrationPage.checkResultsValue("Subjects", SUBJECT);
+            registrationPage.checkResultsValue("Hobbies", HOBIE);
+            registrationPage.checkResultsValue("Picture", file.getName());
+            registrationPage.checkResultsValue("Address", ADDRESS);
+            registrationPage.checkResultsValue("State and City", STATE + " " + CITY);
+        });
     }
 }
