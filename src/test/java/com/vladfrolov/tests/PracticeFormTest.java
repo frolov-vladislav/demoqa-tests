@@ -31,6 +31,7 @@ public class PracticeFormTest extends TestBase {
             registrationPage.checkReadingCheckbox();
             registrationPage.uploadFile(file);
             registrationPage.typeAddress(ADDRESS);
+            registrationPage.chooseStateAndCity(STATE, CITY);
         });
 
         step("Submit filled form", () -> {
@@ -48,6 +49,7 @@ public class PracticeFormTest extends TestBase {
             registrationPage.checkResultsValue("Hobbies", HOBIE);
             registrationPage.checkResultsValue("Picture", file.getName());
             registrationPage.checkResultsValue("Address", ADDRESS);
+            registrationPage.checkResultsValue("State and City", STATE + " " + CITY);
         });
     }
 }
