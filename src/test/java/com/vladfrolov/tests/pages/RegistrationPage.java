@@ -90,7 +90,7 @@ public class RegistrationPage {
         stateDropMenu.click();
         element(byText(state)).click();
         cityDropMenu.click();
-        element(byText(city)).click();
+        element("#stateCity-wrapper").$(byText(city)).click();
     }
 
     public void clickOnSubmitButton() {
