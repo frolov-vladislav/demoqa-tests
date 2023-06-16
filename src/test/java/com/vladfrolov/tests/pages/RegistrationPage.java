@@ -9,6 +9,7 @@ import java.io.File;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.element;
 
 public class RegistrationPage {
@@ -87,10 +88,10 @@ public class RegistrationPage {
     }
 
     public void chooseStateAndCity(String state, String city) {
-        stateDropMenu.scrollTo().click();
-        element(byText(state)).click();
+        stateDropMenu.click();
+        $(byText(state)).click();
         cityDropMenu.click();
-        element("#stateCity-wrapper").$(byText(city)).click();
+        $("#stateCity-wrapper").$(byText(city)).click();
     }
 
     public void clickOnSubmitButton() {

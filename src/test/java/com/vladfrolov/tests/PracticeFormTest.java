@@ -38,7 +38,7 @@ public class PracticeFormTest extends TestBase {
             registrationPage.clickOnSubmitButton();
         });
 
-        step("Virify successful form submit", () -> {
+        step("Verify successful form submit", () -> {
             registrationPage.resultPopupTitleIsVisible();
             registrationPage.checkResultsValue("Student Name", FIRST_NAME + " " + LAST_NAME);
             registrationPage.checkResultsValue("Student Email", EMAIL);
