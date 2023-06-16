@@ -12,7 +12,7 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.startMaximized = true;
+        Configuration.browserSize = "3600x1080";
         Configuration.pageLoadTimeout = 60000;
         SelenideLogger.addListener("Allure", new AllureSelenide());
 
