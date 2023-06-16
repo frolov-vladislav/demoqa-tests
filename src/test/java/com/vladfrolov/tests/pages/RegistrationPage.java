@@ -86,11 +86,11 @@ public class RegistrationPage {
         addressField.setValue(address);
     }
 
-    public void chooseStateAndCity(String state, String city) {
-        stateDropMenu.click();
+    public void chooseStateAndCity(String state) {
+        stateDropMenu.scrollTo().click();
         element(byText(state)).click();
-        cityDropMenu.click();
-        element("#stateCity-wrapper").$(byText(city)).click();
+        cityDropMenu.scrollTo().click();
+        element("#stateCity-wrapper").$("#react-select-4-option-0").click();
     }
 
     public void clickOnSubmitButton() {

@@ -15,7 +15,7 @@ public class PracticeFormTest extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
-    public void test() throws Exception {
+    public void test() {
         step("Open students registration form", () -> {
             open("/automation-practice-form");
         });
@@ -31,7 +31,7 @@ public class PracticeFormTest extends TestBase {
             registrationPage.checkReadingCheckbox();
             registrationPage.uploadFile(file);
             registrationPage.typeAddress(ADDRESS);
-            registrationPage.chooseStateAndCity(STATE, CITY);
+            registrationPage.chooseStateAndCity(STATE);
         });
 
         step("Submit filled form", () -> {
