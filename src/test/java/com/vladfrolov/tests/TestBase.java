@@ -11,9 +11,7 @@ import  helpers.Attach;
 public class TestBase {
     @BeforeAll
     static void beforeAll() {
-        Configuration.browserSize = "3100x1080";
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadTimeout = 60000;
 
         SelenideLogger.addListener("Allure", new AllureSelenide());
 

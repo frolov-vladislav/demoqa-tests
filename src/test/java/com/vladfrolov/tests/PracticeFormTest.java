@@ -31,7 +31,7 @@ public class PracticeFormTest extends TestBase {
             registrationPage.checkReadingCheckbox();
             registrationPage.uploadFile(file);
             registrationPage.typeAddress(ADDRESS);
-            registrationPage.chooseStateAndCity(STATE);
+            registrationPage.chooseStateAndCity(STATE, CITY);
         });
 
         step("Submit filled form", () -> {
