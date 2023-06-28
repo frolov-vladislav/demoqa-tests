@@ -60,3 +60,8 @@ task practiceFormWithoutScreen(type: Test) {
         includeTags "withoutScreen"
     }
 }
+task allTests(type: Test) {
+    useJUnitPlatform {
+        includeTags "All"
+    }
+}
