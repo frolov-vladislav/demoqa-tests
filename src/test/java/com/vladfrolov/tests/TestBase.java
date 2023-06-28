@@ -37,8 +37,5 @@ public class TestBase {
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
-        capabilities.setCapability("enableVNC", false);
-        capabilities.setCapability("enableVideo", false);
-        Configuration.browserCapabilities = capabilities;
     }
 }
