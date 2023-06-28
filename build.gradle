@@ -50,16 +50,19 @@ tasks.withType(Test) {
         }
     }
 }
+
 task practiceFormWithScreen(type: Test) {
     useJUnitPlatform {
         includeTags "withScreen"
     }
 }
+
 task practiceFormWithoutScreen(type: Test) {
     useJUnitPlatform {
         includeTags "withoutScreen"
     }
 }
+
 task allTests(type: Test) {
     useJUnitPlatform {
         includeTags "All"
