@@ -6,8 +6,10 @@ import config.CredentialsConfig;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
+import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static java.lang.String.format;
@@ -16,8 +18,8 @@ public class TestBase {
     public static CredentialsConfig credentials = ConfigFactory.create(CredentialsConfig.class);
 
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeEach
+    void beforeEach() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = System.getProperty("browserSize", "1920x1980");
         Configuration.browser = System.getProperty("browser", "chrome");
