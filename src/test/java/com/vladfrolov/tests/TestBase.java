@@ -6,9 +6,7 @@ import config.CredentialsConfig;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -16,7 +14,7 @@ import static java.lang.String.format;
 
 public class TestBase {
     public static CredentialsConfig credentials = ConfigFactory.create(CredentialsConfig.class);
-
+    public DesiredCapabilities capabilities = new DesiredCapabilities();
 
     @BeforeEach
     void beforeEach() {
@@ -26,8 +24,6 @@ public class TestBase {
         Configuration.browserVersion = System.getProperty("version", "99.0");
         Configuration.pageLoadTimeout = 60000;
         SelenideLogger.addListener("Allure", new AllureSelenide());
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
         Configuration.browserCapabilities = capabilities;
@@ -41,5 +37,8 @@ public class TestBase {
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
+        capabilities.setCapability("enableVNC", false);
+        capabilities.setCapability("enableVideo", false);
+        Configuration.browserCapabilities = capabilities;
     }
 }
